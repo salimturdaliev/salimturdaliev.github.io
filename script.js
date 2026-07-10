@@ -25,6 +25,20 @@ const sections = sectionLinks
   .map((link) => document.querySelector(link.getAttribute("href")))
   .filter(Boolean);
 
+const openTargetDetails = () => {
+  if (!window.location.hash) {
+    return;
+  }
+
+  const target = document.querySelector(window.location.hash);
+  if (target instanceof HTMLDetailsElement) {
+    target.open = true;
+  }
+};
+
+openTargetDetails();
+window.addEventListener("hashchange", openTargetDetails);
+
 const observer = new IntersectionObserver(
   (entries) => {
     const visible = entries
